@@ -7,30 +7,29 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator
-} from 'react-native';
-import Home from "./src/screens/home"
+import Home from "./src/screens/home";
+import Movie from "./src/screens/movie";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator,CardStyleInterpolators } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
 export default function App() {
-  
   return (
     <>
-      <Home />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" options={{
+              headerShown: false
+            }} component={Home} />
+          <Stack.Screen name="MovieDetails" options={{
+            cardStyleInterpolator:
+            CardStyleInterpolators.forModalPresentationIOS,
+              headerShown: false
+            }} component={Movie} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  loading: {
-    flex: 1,
-    justifyContent: "center"
-  }
-});

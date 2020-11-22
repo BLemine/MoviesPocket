@@ -8,9 +8,11 @@ export default (props) => {
             <Text style={styles.listTitle}>{props.listTitle}</Text>
             <ScrollView horizontal={true}>
                 {props.data.map((movie, index) => {
-                    return <TouchableOpacity key={index} style={{ height: 200 }}>
-                        <Image source={{ uri: "https://image.tmdb.org/t/p/original" + movie.backdrop_path }} style={styles.movie} />
-                    </TouchableOpacity>
+                    return (
+                        <TouchableOpacity key={index} style={{ height: 200 }} onPress={() => props.navigation.navigate("MovieDetails", { movie: movie })}>
+                            <Image loadingIndicatorSource={require("../../assets/media/spinner.gif")} source={{ uri: "https://image.tmdb.org/t/p/original" + (movie.backdrop_path || movie.poster_path) }} style={styles.movie} />
+                        </TouchableOpacity>
+                    )
                 })}
             </ScrollView>
         </View>

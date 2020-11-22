@@ -8,6 +8,8 @@ target 'MoviesPocket' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
   target 'MoviesPocketTests' do
     inherit! :complete
     # Pods for testing
