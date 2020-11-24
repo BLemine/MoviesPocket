@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { Instance } from "../../services";
 import YouTube from 'react-native-youtube';
+import access from "../../../access.json";
 
 export default ({ navigation, route }) => {
     const [trailerMessage, setTrailerMessage] = React.useState("");
@@ -42,7 +43,7 @@ export default ({ navigation, route }) => {
                 {loading && <View style={{ flex: 1 }}><ActivityIndicator size="large" color="white" style={styles.loading} /></View>}
                 {!loading && movie.trailer &&
                     <YouTube
-                        apiKey="AIzaSyDX6FS6_Y_F1b-1ScX9hBga7Ecr8G2jwog"
+                        apiKey={access.youtube_dev_apiKey}
                         videoId={movie.trailer.replace("/", "")} // The YouTube video ID
                         play // control playback of video with true/false
                         onReady={() => { }}
