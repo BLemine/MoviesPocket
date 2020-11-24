@@ -25,7 +25,7 @@ export default ({ navigation, route }) => {
     return (
         <ScrollView style={{ backgroundColor: "#282c34", height: "100%" }}>
             <View>
-                <Image style={{ width: "100%", height: 200 }} source={{ uri: "https://image.tmdb.org/t/p/original" + movie.backdrop_path }} />
+                <Image style={{ width: "100%", height: 200 }} defaultSource={require("../../../assets/media/spinner.gif")} source={{ uri: "https://image.tmdb.org/t/p/original" + movie.backdrop_path }} />
             </View>
             <View>
                 <Text style={{ color: "white", }}>Title : {movie.title ? movie.title : movie.name} </Text>

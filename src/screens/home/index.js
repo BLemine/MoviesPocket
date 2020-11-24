@@ -17,32 +17,21 @@ import {
     Image,
     ActivityIndicator
 } from 'react-native';
-
-import { Instance } from "../../services";
-import MoviesList from "../../components/MoviesList";
 import { Icon } from 'native-base';
 import styles from "./styles";
+import Trending from "../../components/Trending";
+import TopRated from "../../components/TopRated";
+import MostPopular from "../../components/MostPopular";
 
-export default function App({navigation}) {
-    const [trending, setTrending] = React.useState([]);
-    const [mostPopular, setMostPopular] = React.useState([]);
-    const [topRated, setTopRated] = React.useState([]);
+export default function App({ navigation }) {
+    
     const [loading, setLoading] = React.useState(true);
 
-    const fetchMovies = async () => {
-        await Instance.get("/trending").then(async (res) => {
-            setTrending(res.data)
-            await Instance.get("/most_popular").then(async (res) => {
-                setMostPopular(res.data.results);
-                await Instance.get("/top_rated").then(res => {
-                    setTopRated(res.data.results);
-                }).catch(ex => console.log(ex))
-            }).catch(ex => console.log(ex))
-        }).catch(ex => console.log(ex))
-        setLoading(false)
-    }
     React.useEffect(() => {
-        fetchMovies();
+
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
     }, [])
 
     if (loading) return <View style={styles.loadingContainer}><ActivityIndicator size="large" color="white" style={styles.loading} /></View>
@@ -56,8 +45,8 @@ export default function App({navigation}) {
                         <Image source={{ uri: 'https://freepngimg.com/thumb/popcorn/23443-2-popcorn-image.png' }} style={styles.popcornImage} />
                     </View>
                     <View style={styles.typesContainer}>
-                        <TouchableOpacity><Text style={styles.types}>Series</Text></TouchableOpacity>
-                        <TouchableOpacity><Text style={styles.types}>Films</Text></TouchableOpacity>
+                        <TouchableOpacity><Text style={styles.types}>Discover</Text></TouchableOpacity>
+                        <TouchableOpacity><Text style={styles.types}>TV shows</Text></TouchableOpacity>
                         <TouchableOpacity><Text style={styles.types}>My List</Text></TouchableOpacity>
                     </View>
                     <View style={styles.optionsContainer}>
@@ -74,9 +63,11 @@ export default function App({navigation}) {
                             <Text style={{ color: "white", textAlign: "center" }}>Info</Text>
                         </TouchableOpacity>
                     </View>
-                    <MoviesList navigation={navigation} data={trending} listTitle="Trending" />
-                    <MoviesList navigation={navigation} data={mostPopular} listTitle="Most Popular" />
-                    <MoviesList navigation={navigation} data={topRated} listTitle="Top Rated" />
+                    
+                    <Trending navigation={navigation} />
+                    <MostPopular navigation={navigation} />
+                    <TopRated navigation={navigation} />
+
                 </ScrollView>
             </SafeAreaView>
         </>
