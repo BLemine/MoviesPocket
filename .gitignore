@@ -60,3 +60,5 @@ buck-out/
 
 # for local serving
 scripts/
+
+access.json
