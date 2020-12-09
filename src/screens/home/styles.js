@@ -1,12 +1,13 @@
 import {StyleSheet} from "react-native";
+import Colors from "../../colors";
 
 const styles = StyleSheet.create({
     container: {
         height: "100%",
-        backgroundColor: "black"
+        backgroundColor: Colors.primary_blue
     },
     loadingContainer: {
-        backgroundColor: "black",
+        backgroundColor: Colors.primary_blue,
         flex: 1
     },
     loading: {

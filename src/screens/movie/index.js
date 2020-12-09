@@ -3,11 +3,13 @@ import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "re
 import { Instance } from "../../services";
 import YouTube from 'react-native-youtube';
 import { youtube_dev_apiKey } from "../../../keys";
+import Colors from "../../colors";
+import {movie_trailer} from "../../../scripts";
 
 export default ({ navigation, route }) => {
     const [trailerMessage, setTrailerMessage] = React.useState("");
     const [loading, setLoading] = React.useState(true);
-    const [movie, setMovie] = React.useState(route.params.movie)
+    const [movie, setMovie] = React.useState(route.params.movie);
     React.useEffect(() => {
         Instance.post("/movie_trailer",
             {
@@ -22,9 +24,18 @@ export default ({ navigation, route }) => {
                 setTrailerMessage("No trailer Available");
                 setLoading(false);
             });
+            /*movie_trailer(movie.id).then(res=>{
+                let aux = movie;
+                aux.trailer = res.data[0].key
+                setMovie(aux);
+                setLoading(false);
+            }).catch(ex =>{
+                setTrailerMessage("No trailer Available");
+                setLoading(false);
+            })*/
     }, [])
     return (
-        <ScrollView style={{ backgroundColor: "#282c34", height: "100%" }}>
+        <ScrollView style={{ backgroundColor: Colors.primary_blue, height: "100%" }}>
             <View>
                 <Image style={{ width: "100%", height: 200 }} defaultSource={require("../../../assets/media/spinner.gif")} source={{ uri: "https://image.tmdb.org/t/p/original" + movie.backdrop_path }} />
             </View>

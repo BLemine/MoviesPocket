@@ -15,7 +15,8 @@ import {
     StatusBar,
     TouchableOpacity,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    RefreshControl
 } from 'react-native';
 import { Icon } from 'native-base';
 import styles from "./styles";
@@ -23,12 +24,22 @@ import Trending from "../../components/Trending";
 import TopRated from "../../components/TopRated";
 import MostPopular from "../../components/MostPopular";
 
-export default function App({ navigation }) {
-    
+export default function App({ navigation, state,dispatch}) {
+
     const [loading, setLoading] = React.useState(true);
+    const [refreshing, setRefreshing] = React.useState(false);
+    const wait = (timeout) => {
+        return new Promise(resolve => {
+          setTimeout(resolve, timeout);
+        });
+      }
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
 
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
     React.useEffect(() => {
-
+        console.log(state)
         setTimeout(() => {
             setLoading(false)
         }, 1000);
@@ -39,13 +50,18 @@ export default function App({ navigation }) {
         <>
             <StatusBar barStyle="dark-content" />
             <SafeAreaView style={styles.container}>
-                <ScrollView>
+                <ScrollView refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }>
                     <Image source={{ uri: "https://image.tmdb.org/t/p/original/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg" }} style={styles.topMovieSelected} />
                     <View style={styles.popcornImageContainer}>
                         <Image source={{ uri: 'https://freepngimg.com/thumb/popcorn/23443-2-popcorn-image.png' }} style={styles.popcornImage} />
                     </View>
                     <View style={styles.typesContainer}>
-                        <TouchableOpacity><Text style={styles.types}>Discover</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() =>{
+                            dispatch({type:"DISCONNECT"})
+                            navigation.navigate("Login")
+                        }}><Text style={styles.types}>Discover</Text></TouchableOpacity>
                         <TouchableOpacity><Text style={styles.types}>TV shows</Text></TouchableOpacity>
                         <TouchableOpacity><Text style={styles.types}>My List</Text></TouchableOpacity>
                     </View>
@@ -63,7 +79,7 @@ export default function App({ navigation }) {
                             <Text style={{ color: "white", textAlign: "center" }}>Info</Text>
                         </TouchableOpacity>
                     </View>
-                    
+
                     <Trending navigation={navigation} />
                     <MostPopular navigation={navigation} />
                     <TopRated navigation={navigation} />
