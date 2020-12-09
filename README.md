@@ -64,7 +64,7 @@ A movies mobile app or as i call it **"MoviesPocket"**, it's a ReactNative app f
 ### Architecture :evergreen_tree:  : 
 In the frontend we've (sure) **React-Native** with **Redux** and in the backend we've **Express.js** + **Firebase** + **Docker**
 
-But here you've just the frontend, the backend will be hosted privately on **AWS** using Docker.
+But here you've just the frontend, the backend will be hosted privately on **AWS** using Docker but a public docker image will be shared.
 
 ---
 
