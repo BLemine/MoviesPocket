@@ -7,8 +7,8 @@ import {
     TextInput,
     TouchableOpacity,
 } from 'react-native';
-import { Instance } from "../../services";
-import Colors from "../../colors";
+import { Instance } from "../../../services";
+import Colors from "../../../colors";
 
 export default function SignUp() {
     const createUser = () => {

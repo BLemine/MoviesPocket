@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
-import { Instance } from "../../services";
+import { Instance } from "../../../services";
 import YouTube from 'react-native-youtube';
 import { youtube_dev_apiKey } from "../../../keys";
-import Colors from "../../colors";
+import Colors from "../../../colors";
 import {movie_trailer} from "../../../scripts";
 
 export default ({ navigation, route }) => {

@@ -7,8 +7,8 @@ import {
     TextInput,
     TouchableOpacity,
 } from 'react-native';
-import Colors from "../../colors";
-import Home from "../home"
+import Colors from "../../../colors";
+import Home from "../../home"
 export default function Login({ navigation, state, dispatch }) {
     const [user, setUser] = React.useState({
         login: "", password: ""
